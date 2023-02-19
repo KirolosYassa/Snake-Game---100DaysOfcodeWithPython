@@ -15,15 +15,15 @@ COLORS = {
 
 class SnakeBody:
 
-    def __init__(self, boxes=3):
+    def __init__(self):
 
         self.snake = []
-
-        for i in range(boxes):
-            # print(i)
-            self.add_box((-DISTANCE*boxes, 0))
-
+        self.create_snake()
         self.head = self.snake[0]
+
+    def create_snake(self, boxes=3):
+        for i in range(boxes):
+            self.add_box((-DISTANCE*boxes, 0))
 
     def add_box(self, position):
         new_box = Turtle(shape="square")
@@ -31,8 +31,14 @@ class SnakeBody:
         new_box.pen(fillcolor="white", pencolor="")
         new_box.goto(position)
         new_box.speed("fastest")
-        # print(new_box.pos())
         self.snake.append(new_box)
+
+    def reset(self, boxes=3):
+        for box in self.snake:
+            box.goto(1000, 1000)
+        self.snake.clear()
+        self.create_snake()
+        self.head = self.snake[0]
 
     def extend(self):
         self.add_box(self.snake[-1].position())

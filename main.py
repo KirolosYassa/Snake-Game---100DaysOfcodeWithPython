@@ -47,13 +47,16 @@ while is_game_on:
     # Check collision at walls
     if snakeBody.near_edge():
         print(f"Boom! Boom! at {snakeBody.head.pos()}")
-        is_game_on = False
+        score.reset()
+        snakeBody.reset()
 
     # Check collision in snake body itself
     for snakeBox in snake[1:]:
         if snakeBody.head.distance(snakeBox) < 5:
             print(f"The snake touched itself at {snakeBox.pos()}")
-            is_game_on = False
+            score.reset()
+            snakeBody.reset()
 
-score.game_over()
+
+# score.reset()
 screen.exitonclick()
